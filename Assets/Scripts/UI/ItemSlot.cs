@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 // Drag and drop from https://www.youtube.com/watch?v=BGr-7GZJNXg&ab_channel=CodeMonkey
 
-public class ItemSlot : MonoBehaviour, IDropHandler
+public class ItemSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
     protected bool isFull = false;
@@ -13,6 +13,8 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     protected UIDie item;
 
     public string currentName;
+
+    public GameObject tooltip;
 
     public virtual void OnDrop(PointerEventData eventData)
     {
@@ -40,4 +42,29 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         currentName = "";
     }
 
+    protected virtual void ShowToolTip()
+    {
+        if(tooltip)
+        {
+            tooltip.SetActive(true);
+        }
+    }
+
+    protected virtual void HideToolTip()
+    {
+        if (tooltip)
+        {
+            tooltip.SetActive(false);
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ShowToolTip();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        HideToolTip();
+    }
 }
