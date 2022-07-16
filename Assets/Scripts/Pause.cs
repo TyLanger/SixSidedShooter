@@ -10,6 +10,9 @@ public class Pause : MonoBehaviour
 
     public event System.Action<bool> OnPauseToggle;
 
+    public float timeBank = 0;
+    public float timeNeededToPause = 60;
+
     private void Awake()
     {
         instance = this;
@@ -18,14 +21,25 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Jump"))
+        timeBank += Time.deltaTime;
+
+        if (Input.GetButtonDown("Jump"))
         {
             TogglePause();
         }
+
     }
 
     void TogglePause()
     {
+        if(!isPaused)
+        {
+            if(timeBank < timeNeededToPause)
+            {
+                return;
+            }
+            timeBank = 0;
+        }
         isPaused = !isPaused;
         OnPauseToggle?.Invoke(isPaused);
         Time.timeScale = isPaused ? 0 : 1;

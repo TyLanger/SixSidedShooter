@@ -9,15 +9,17 @@ public class Projectile : MonoBehaviour
     float currentSpeed = 0;
     float lifetime = 5;
     public int damage = 1;
+    public int damageBoost = 0;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    public void Setup(float speed)
+    public void Setup(float speed, int boost)
     {
         currentSpeed = speed;
+        damageBoost = boost;
     }
 
     private void FixedUpdate()
@@ -39,7 +41,7 @@ public class Projectile : MonoBehaviour
         Health h = other.GetComponent<Health>();
         if(h)
         {
-            h.TakeDamage(damage);
+            h.TakeDamage(damage + damageBoost);
             Death();
         }
     }

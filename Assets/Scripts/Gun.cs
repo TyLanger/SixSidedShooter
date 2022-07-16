@@ -6,6 +6,7 @@ public class Gun : MonoBehaviour
 {
     public Projectile projectile;
     public float projectileMoveSpeed = 20;
+    int damageBoost = 0;
 
     public Transform muzzlePoint;
 
@@ -44,7 +45,7 @@ public class Gun : MonoBehaviour
         if (CanFire())
         {
             Projectile copy = Instantiate(projectile, muzzlePoint.position, transform.rotation);
-            copy.Setup(projectileMoveSpeed);
+            copy.Setup(projectileMoveSpeed, damageBoost);
 
             currentShots--;
             timeOfNextShot = Time.time + timeBetweenShots;
@@ -53,5 +54,10 @@ public class Gun : MonoBehaviour
                 StartCoroutine(StartReload());
             }
         }
+    }
+
+    public void BuffDamage(int boost)
+    {
+        damageBoost = boost;
     }
 }

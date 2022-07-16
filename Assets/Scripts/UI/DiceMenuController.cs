@@ -12,10 +12,15 @@ public class DiceMenuController : MonoBehaviour
     public event Action OnRoll;
     public event Action OnDieEvaluation;
 
+    //public Player player;
+    public PlayerStats playerStats;
+
     // Start is called before the first frame update
     void Awake()
     {
         pause.OnPauseToggle += OnPauseToggle;
+        diceMenuHolder.gameObject.SetActive(false);
+
     }
 
 
@@ -28,12 +33,16 @@ public class DiceMenuController : MonoBehaviour
             diceMenuHolder.gameObject.SetActive(isPaused);
 
             RollDice();
+            playerStats.Reset();
         }
         else
         {
+            // this will send any relevent info to the stats
             EvaluateDiceSelection();
             // need to disable after they do stuff
             diceMenuHolder.gameObject.SetActive(isPaused);
+            // tell the stats manager to update the player
+            playerStats.PushChanges();
         }
     }
 
@@ -46,4 +55,5 @@ public class DiceMenuController : MonoBehaviour
     {
         OnDieEvaluation?.Invoke();
     }
+
 }

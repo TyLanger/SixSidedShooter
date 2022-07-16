@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public event System.Action OnDeath;
+
     Health health;
     Motor motor;
 
@@ -15,7 +17,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         health = GetComponent<Health>();
-        health.maxHealth = number;
+        health.OnDeath += Death;
 
         motor = GetComponent<Motor>();
         motor.ChangeMoveSpeed(moveSpeed);
@@ -26,4 +28,17 @@ public class Enemy : MonoBehaviour
         motor.MoveTowards(playerTrans.position - transform.position);
     }
 
+    public void Setup(Transform player, int enemyNumber)
+    {
+        number = enemyNumber;
+        playerTrans = player;
+        health.maxHealth = number;
+
+    }
+
+    void Death()
+    {
+        OnDeath?.Invoke();
+        Destroy(gameObject);
+    }
 }

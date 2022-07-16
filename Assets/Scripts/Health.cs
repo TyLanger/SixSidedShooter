@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    public event System.Action OnDeath;
 
     public int maxHealth = 10;
     [SerializeField] int currentHealth;
@@ -23,12 +24,13 @@ public class Health : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        Debug.Log($"Took {damage} damage");
         if (currentHealth <= 0)
             Death();
     }
 
     void Death()
     {
-        Destroy(gameObject);
+        OnDeath?.Invoke();
     }
 }

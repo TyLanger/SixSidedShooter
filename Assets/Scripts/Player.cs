@@ -55,4 +55,9 @@ public class Player : MonoBehaviour
     {
         motor.ChangeMoveSpeed(moveSpeed);
     }
+
+    public void BuffDamage(int damageBoost)
+    {
+        currentGun.BuffDamage(damageBoost);
+    }
 }

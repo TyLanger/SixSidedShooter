@@ -20,12 +20,19 @@ public class DieSlot : ItemSlot
         diceMenu.OnRoll += Release;
     }
 
-    void Evaluate()
+    protected virtual void Evaluate()
     {
-        if (isFull)
+        if(!isFull)
         {
-            Debug.Log($"Value: {item.GetValue()}");
+            return;
         }
+    }
+
+    protected int GetValue()
+    {
+        if(isFull)
+            return item.GetValue();
+        return 0;
     }
 
 }
