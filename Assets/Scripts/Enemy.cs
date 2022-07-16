@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
     public int number = 1;
     public float moveSpeed = 6;
 
+    public Sprite[] faceSprites;
+    public SpriteRenderer spriteRenderer;
+
     private void Awake()
     {
         health = GetComponent<Health>();
@@ -34,6 +37,7 @@ public class Enemy : MonoBehaviour
         playerTrans = player;
         health.maxHealth = number;
 
+        spriteRenderer.sprite = faceSprites[number - 1];
     }
 
     void Death()

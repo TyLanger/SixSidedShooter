@@ -55,5 +55,4 @@ public class DiceMenuController : MonoBehaviour
     {
         OnDieEvaluation?.Invoke();
     }
-
 }

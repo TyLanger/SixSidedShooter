@@ -14,7 +14,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 
     public string currentName;
 
-    public void OnDrop(PointerEventData eventData)
+    public virtual void OnDrop(PointerEventData eventData)
     {
 
         if (eventData.pointerDrag != null)

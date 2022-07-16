@@ -6,23 +6,23 @@ public class Gun : MonoBehaviour
 {
     public Projectile projectile;
     public float projectileMoveSpeed = 20;
-    int damageBoost = 0;
+    protected int damageBoost = 0;
 
     public Transform muzzlePoint;
 
     public float timeBetweenShots = 0.1f;
     public float reloadTime = 1;
     public int maxAmmo = 6;
-    int currentShots = 0;
+    protected int currentShots = 0;
 
-    float timeOfNextShot = 0;
+    protected float timeOfNextShot = 0;
 
     private void Awake()
     {
         InstantReload();
     }
 
-    IEnumerator StartReload()
+    protected IEnumerator StartReload()
     {
         yield return new WaitForSeconds(reloadTime);
         InstantReload();
@@ -33,14 +33,14 @@ public class Gun : MonoBehaviour
         currentShots = maxAmmo;
     }
 
-    bool CanFire()
+    protected bool CanFire()
     {
         bool hasBullets = (currentShots > 0);
         bool fireRateCheck = (timeOfNextShot < Time.time);
         return hasBullets && fireRateCheck;
     }
 
-    public void Fire()
+    public virtual void Fire()
     {
         if (CanFire())
         {

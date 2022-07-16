@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 
     public float moveSpeed = 10;
     Vector3 moveInput;
+    int moveSpeedBoost = 0;
 
     Rigidbody rb;
     Camera cam;
@@ -53,11 +54,17 @@ public class Player : MonoBehaviour
 
     void UpdateMoveSpeed()
     {
-        motor.ChangeMoveSpeed(moveSpeed);
+        motor.ChangeMoveSpeed(moveSpeed + moveSpeedBoost);
     }
 
     public void BuffDamage(int damageBoost)
     {
         currentGun.BuffDamage(damageBoost);
+    }
+
+    public void BuffMoveSpeed(int value)
+    {
+        moveSpeedBoost = value;
+        UpdateMoveSpeed();
     }
 }

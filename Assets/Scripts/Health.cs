@@ -24,9 +24,17 @@ public class Health : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log($"Took {damage} damage");
         if (currentHealth <= 0)
             Death();
+    }
+
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
     }
 
     void Death()

@@ -2,18 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageBuff : DieSlot
+public class HealSlot : DieSlot
 {
-
-    string tooltip = "Boosts damage by die.";
+    string tooltip = "Heal for die amount";
 
     protected override void Evaluate()
     {
         base.Evaluate();
         if(isFull)
         {
-            diceMenu.playerStats.BuffDamage(GetValue());
+            diceMenu.playerStats.Heal(GetValue());
         }
-        
     }
 }

@@ -8,7 +8,8 @@ public class PlayerStats : MonoBehaviour
 
     // all types of buffs here
     int damageBoost = 0;
-
+    int moveSpeedBoost = 0;
+    int healAmount = 0;
 
     private void Awake()
     {
@@ -19,6 +20,8 @@ public class PlayerStats : MonoBehaviour
     {
         // reset each stat
         damageBoost = 0;
+        moveSpeedBoost = 0;
+        healAmount = 0;
     }
 
     public void PushChanges()
@@ -27,6 +30,8 @@ public class PlayerStats : MonoBehaviour
 
         // player.ChangeGuns(gunIndex)
         player.BuffDamage(damageBoost);
+        player.BuffMoveSpeed(moveSpeedBoost);
+        player.GetComponent<Health>().Heal(healAmount);
     }
 
 
@@ -34,5 +39,15 @@ public class PlayerStats : MonoBehaviour
     public void BuffDamage(int value)
     {
         damageBoost = value;
+    }
+
+    public void BuffMoveSpeed(int value)
+    {
+        moveSpeedBoost = value;
+    }
+
+    public void Heal(int value)
+    {
+        healAmount = value;
     }
 }

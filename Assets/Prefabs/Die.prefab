@@ -103,3 +103,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
   value: 1
+  diceFaces:
+  - {fileID: 21300000, guid: ccc9cd121fe22c741aee11d712865967, type: 3}
+  - {fileID: 21300000, guid: a7330225572231a448553758c0d73a66, type: 3}
+  - {fileID: 21300000, guid: ac98789228611354eb214af570f1b7c6, type: 3}
+  - {fileID: 21300000, guid: 74c1f4ddffa6aac458659426d39576b9, type: 3}
+  - {fileID: 21300000, guid: 32eb6614bc07b884d8aac18df0b0d937, type: 3}
+  - {fileID: 21300000, guid: 821646a500cfe37479916e05594a9180, type: 3}

@@ -52,9 +52,13 @@ public class EnemySpawnDirector : MonoBehaviour
         enemiesAlive--;
         enemiesKilled++;
 
-        if (enemyNumberToSpawn < 7)
+        if (enemyNumberToSpawn < 6)
         {
             enemyNumberToSpawn = (enemiesKilled / 10)+1;
+            if(enemyNumberToSpawn > 6)
+            {
+                enemyNumberToSpawn = 6;
+            }
         }
         
     }

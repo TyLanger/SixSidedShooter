@@ -12,6 +12,7 @@ public class Pause : MonoBehaviour
 
     public float timeBank = 0;
     public float timeNeededToPause = 60;
+    public float maxTimeBetweenPauses = 30;
 
     private void Awake()
     {
@@ -23,7 +24,7 @@ public class Pause : MonoBehaviour
     {
         timeBank += Time.deltaTime;
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") || timeBank > maxTimeBetweenPauses)
         {
             TogglePause();
         }
