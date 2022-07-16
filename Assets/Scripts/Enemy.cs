@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public event System.Action OnDeath;
 
-    Health health;
+    protected Health health;
     protected Motor motor;
 
     public Transform playerTrans;
@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     public float moveSpeed = 6;
 
     public Sprite[] faceSprites;
-    public SpriteRenderer spriteRenderer;
+    public SpriteRenderer[] spriteRenderers;
 
     private void Awake()
     {
@@ -37,7 +37,11 @@ public class Enemy : MonoBehaviour
         playerTrans = player;
         health.maxHealth = number;
 
-        spriteRenderer.sprite = faceSprites[number - 1];
+        foreach (var renderer in spriteRenderers)
+        {
+            renderer.sprite = faceSprites[number - 1];
+
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -50,7 +54,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Death()
+    protected virtual void Death()
     {
         OnDeath?.Invoke();
         Destroy(gameObject);

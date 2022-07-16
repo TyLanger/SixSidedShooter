@@ -8,6 +8,7 @@ public class EnemySpawnDirector : MonoBehaviour
     public Enemy enemy;
     public Transform playerSatellite;
     public FourEnemy four;
+    public Boss boss;
 
     [SerializeField] int enemiesAlive = 0;
     int enemiesKilled = 0;
@@ -80,7 +81,14 @@ public class EnemySpawnDirector : MonoBehaviour
 
         if (enemyNumberToSpawn < 6)
         {
+            int oldNum = enemyNumberToSpawn;
             enemyNumberToSpawn = (enemiesKilled / 10)+1;
+
+            if(oldNum < enemyNumberToSpawn)
+            {
+                SpawnBoss();
+            }
+
             if(enemyNumberToSpawn == 4)
             {
                 spawnWalls = true;
@@ -91,6 +99,17 @@ public class EnemySpawnDirector : MonoBehaviour
             }
         }
         
+    }
+
+    void SpawnBoss()
+    {
+        float x = Random.Range(-1f, 1f);
+        float z = Random.Range(-1f, 1f);
+        Vector3 spawnPos = player.transform.position + new Vector3(x, 0, z).normalized * spawnDistFromPlayer;
+
+        Boss b = Instantiate(boss, spawnPos, Quaternion.identity);
+        b.Setup(player.transform, enemyNumberToSpawn-1);
+
     }
 
     void SpawnWalls()

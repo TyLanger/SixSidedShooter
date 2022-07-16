@@ -1010,6 +1010,7 @@ MonoBehaviour:
   enemy: {fileID: 7360386444627719561, guid: 6eddfb085f37c4849adb10b7aa6fb1af, type: 3}
   playerSatellite: {fileID: 15303237}
   four: {fileID: 5714283247009340882, guid: 5f5f1b206f7c0364a937b9a18eac7771, type: 3}
+  boss: {fileID: 5842245383305340596, guid: 22266f63d4516964796894ddf1ee3137, type: 3}
   enemiesAlive: 0
   timeBetweenEnemies: 1
   spawnDistFromPlayer: 20

@@ -9,6 +9,8 @@ public class Health : MonoBehaviour
     public int maxHealth = 10;
     [SerializeField] int currentHealth;
 
+    bool isInvuln = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,8 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isInvuln)
+            return;
         currentHealth -= damage;
         if (currentHealth <= 0)
             Death();
@@ -35,6 +39,11 @@ public class Health : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+    }
+
+    public void SetInvincible(bool value)
+    {
+        isInvuln = value;
     }
 
     void Death()
