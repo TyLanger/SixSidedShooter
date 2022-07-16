@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
 
     Rigidbody rb;
     float currentSpeed = 0;
-    float lifetime = 5;
+    public float lifetime = 5;
     public int damage = 1;
     public int damageBoost = 0;
 
@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         Health h = other.GetComponent<Health>();
         if(h)
@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    void Death()
+    protected void Death()
     {
         Destroy(gameObject);
     }

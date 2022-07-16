@@ -9,19 +9,25 @@ public class Player : MonoBehaviour
     Vector3 moveInput;
     int moveSpeedBoost = 0;
 
-    Rigidbody rb;
     Camera cam;
     Motor motor;
+    Health health;
+
 
     public Gun currentGun;
+
+    public Gun[] allGuns;
 
     // Start is called before the first frame update
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        health = GetComponent<Health>();
+        health.OnDeath += Death;
         motor = GetComponent<Motor>();
         UpdateMoveSpeed();
         cam = Camera.main;
+
+
     }
 
     // Update is called once per frame
@@ -55,6 +61,16 @@ public class Player : MonoBehaviour
     void UpdateMoveSpeed()
     {
         motor.ChangeMoveSpeed(moveSpeed + moveSpeedBoost);
+    }
+
+    void Death()
+    {
+        Debug.Log("You've died");
+    }
+
+    public void ChangeGuns(int value)
+    {
+        currentGun = allGuns[value - 1];
     }
 
     public void BuffDamage(int damageBoost)

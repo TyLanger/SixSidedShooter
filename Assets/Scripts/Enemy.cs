@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public event System.Action OnDeath;
 
     Health health;
-    Motor motor;
+    protected Motor motor;
 
     public Transform playerTrans;
 
@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
         motor.ChangeMoveSpeed(moveSpeed);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         motor.MoveTowards(playerTrans.position - transform.position);
     }
@@ -38,6 +38,16 @@ public class Enemy : MonoBehaviour
         health.maxHealth = number;
 
         spriteRenderer.sprite = faceSprites[number - 1];
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Player p = collision.transform.GetComponent<Player>();
+        if (p != null)
+        {
+            p.GetComponent<Health>().TakeDamage(number);
+            Death();
+        }
     }
 
     void Death()

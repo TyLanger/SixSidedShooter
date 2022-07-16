@@ -6,6 +6,8 @@ public class EnemySpawnDirector : MonoBehaviour
 {
     public Player player;
     public Enemy enemy;
+    public Transform playerSatellite;
+    public FourEnemy four;
 
     [SerializeField] int enemiesAlive = 0;
     int enemiesKilled = 0;
@@ -15,10 +17,14 @@ public class EnemySpawnDirector : MonoBehaviour
     float timeOfNextEnemy = 0;
     public float spawnDistFromPlayer = 10;
 
+    public float wallTime = 10;
+    public float timeBetweenWalls = 30;
+    bool spawnWalls = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //SpawnWalls();
     }
 
     // Update is called once per frame
@@ -31,6 +37,16 @@ public class EnemySpawnDirector : MonoBehaviour
                 SpawnEnemy();
                 timeOfNextEnemy = Time.time + timeBetweenEnemies;
             }
+
+            if (spawnWalls)
+            {
+                wallTime -= Time.deltaTime;
+                if (wallTime < 0)
+                {
+                    //spawnWalls = false;
+                    SpawnWalls();
+                }
+            }
         }
     }
 
@@ -38,10 +54,20 @@ public class EnemySpawnDirector : MonoBehaviour
     {
         float x = Random.Range(-1f, 1f);
         float z = Random.Range(-1f, 1f);
-        Vector3 spawnPos = player.transform.position + new Vector3(x, 0, z).normalized*spawnDistFromPlayer;
+        Vector3 spawnPos = player.transform.position + new Vector3(x, 0, z).normalized * spawnDistFromPlayer;
 
-        var copy = Instantiate(enemy, spawnPos, Quaternion.identity);
-        copy.Setup(player.transform, enemyNumberToSpawn);
+        Enemy copy;
+
+        copy = Instantiate(enemy, spawnPos, Quaternion.identity);
+
+        if (enemyNumberToSpawn == 2)
+        {
+            copy.Setup(playerSatellite, enemyNumberToSpawn);
+        }
+        else
+        {
+            copy.Setup(player.transform, enemyNumberToSpawn);
+        }
         copy.OnDeath += EnemyDied;
 
         enemiesAlive++;
@@ -55,11 +81,41 @@ public class EnemySpawnDirector : MonoBehaviour
         if (enemyNumberToSpawn < 6)
         {
             enemyNumberToSpawn = (enemiesKilled / 10)+1;
+            if(enemyNumberToSpawn == 4)
+            {
+                spawnWalls = true;
+            }
             if(enemyNumberToSpawn > 6)
             {
                 enemyNumberToSpawn = 6;
             }
         }
         
+    }
+
+    void SpawnWalls()
+    {
+        if (wallTime > 0)
+            //return;
+
+        wallTime = timeBetweenWalls;
+
+        int numWalls = 10;
+        float spacing = 4;
+        int direction = -1;
+
+        // spawn to the left and right
+        for (int j = 0; j < 2; j++)
+        {
+
+            for (int i = 0; i < numWalls; i++)
+            {
+                Vector3 spawnPos = player.transform.position + new Vector3(direction * spawnDistFromPlayer, 0, ((numWalls / 2) * spacing - (spacing * i)) + j * spacing * 0.5f);
+                FourEnemy copy = Instantiate(four, spawnPos, Quaternion.identity);
+                copy.WallMode(Vector3.left * direction, 10);
+                copy.Setup(player.transform, 4);
+            }
+            direction *= -1;
+        }
     }
 }
