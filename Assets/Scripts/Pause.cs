@@ -8,6 +8,7 @@ public class Pause : MonoBehaviour
     public bool isPaused = false;
     public static Pause instance;
 
+    public event System.Action<bool> OnPauseToggle;
 
     private void Awake()
     {
@@ -19,13 +20,14 @@ public class Pause : MonoBehaviour
     {
         if(Input.GetButtonDown("Jump"))
         {
-            isPaused = !isPaused;
             TogglePause();
         }
     }
 
     void TogglePause()
     {
+        isPaused = !isPaused;
+        OnPauseToggle?.Invoke(isPaused);
         Time.timeScale = isPaused ? 0 : 1;
     }
 }

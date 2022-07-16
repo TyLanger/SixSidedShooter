@@ -10,13 +10,14 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 {
     public Canvas canvas;
 
-    RectTransform rectTransform;
+    protected RectTransform rectTransform;
     CanvasGroup canvasGroup;
 
-    public event Action onDieLifted;
+    public event Action OnDieLifted;
 
-    private void Awake()
+    protected virtual void Awake()
     {
+        
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
@@ -30,7 +31,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         canvasGroup.blocksRaycasts = false;
         // release from where it is stored
-        onDieLifted?.Invoke();
+        OnDieLifted?.Invoke();
     }
 
     public void OnEndDrag(PointerEventData eventData)

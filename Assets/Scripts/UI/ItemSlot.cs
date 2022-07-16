@@ -8,9 +8,9 @@ using UnityEngine.EventSystems;
 public class ItemSlot : MonoBehaviour, IDropHandler
 {
 
-    bool isFull = false;
+    protected bool isFull = false;
 
-    DragDrop item;
+    protected UIDie item;
 
     public string currentName;
 
@@ -23,16 +23,19 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             {
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
                 isFull = true;
-                item = eventData.pointerDrag.GetComponent<DragDrop>();
-                item.onDieLifted += Release;
-                currentName = item.name;
+                item = eventData.pointerDrag.GetComponent<UIDie>();
+                item.OnDieLifted += Release;
+                currentName = item.name + ": " + item.GetValue();
             }
         }
     }
 
     public void Release()
     {
-        item.onDieLifted -= Release;
+        if (item != null)
+        {
+            item.OnDieLifted -= Release;
+        }
         isFull = false;
         currentName = "";
     }

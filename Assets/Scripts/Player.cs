@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Pause.instance.isPaused)
+            return;
+
         moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         motor.MoveTowards(moveInput);
 
@@ -37,10 +40,9 @@ public class Player : MonoBehaviour
             Vector3 lookPoint = CameraRay.GetPoint(cameraDist);
             Vector3 eyeLookPoint = new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
 
-            if (!Pause.instance.isPaused)
-            {
-                transform.LookAt(eyeLookPoint);
-            }
+
+            transform.LookAt(eyeLookPoint);
+            
         }
 
         if(Input.GetButton("Fire1"))
