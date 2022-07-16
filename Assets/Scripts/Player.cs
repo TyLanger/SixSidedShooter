@@ -36,10 +36,14 @@ public class Player : MonoBehaviour
         {
             Vector3 lookPoint = CameraRay.GetPoint(cameraDist);
             Vector3 eyeLookPoint = new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
-            transform.LookAt(eyeLookPoint);
+
+            if (!Pause.instance.isPaused)
+            {
+                transform.LookAt(eyeLookPoint);
+            }
         }
 
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButton("Fire1"))
         {
             currentGun.Fire();
         }
