@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2949283154769692820}
   - component: {fileID: 594503309613078540}
   - component: {fileID: 6887368579190911106}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Harpoon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3ac98df0a5ad8459d205decda81e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 5
+  lifetime: 1.5
   damage: 1
   damageBoost: 0
   numPierces: 100

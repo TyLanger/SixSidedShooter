@@ -96,7 +96,7 @@ public class EnemySpawnDirector : MonoBehaviour
     void SpawnWalls()
     {
         if (wallTime > 0)
-            //return;
+            return;
 
         wallTime = timeBetweenWalls;
 

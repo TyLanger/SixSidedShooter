@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 6607795786742555900}
   - component: {fileID: 6607795786742555891}
   - component: {fileID: 5714283247009340882}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FourEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
