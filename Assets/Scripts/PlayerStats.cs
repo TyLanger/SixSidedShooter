@@ -51,6 +51,7 @@ public class PlayerStats : MonoBehaviour
         player.BuffDamage(damageBoostDecay);
         player.BuffMoveSpeed(moveSpeedBoost);
         player.GetComponent<Health>().Heal(healAmount);
+        healAmount = 0;
         player.ClipExtend(clipAmount);
         
 

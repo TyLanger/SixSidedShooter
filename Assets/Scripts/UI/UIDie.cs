@@ -56,8 +56,23 @@ public class UIDie : DragDrop
 
     public void DestroyTempDie()
     {
-        Debug.Log("Destroy temp die");
+        //Debug.Log($"Destroy temp die {name}");
         UnHook();
-        Destroy(gameObject);
+        diceMenu.OnTempDieUsed -= DestroyTempDie;
+        // this method might be being called before stats.evaluate
+        // so the die and its value are gone before being recorded
+        //StartCoroutine(LateDestroy());
+        diceMenu.OnRoll += LateDestroy;
+    }
+
+    void LateDestroy()
+    {
+        //Debug.Log($"Late destroy temp die {name}");
+
+        //yield return new WaitForSeconds(2);
+        diceMenu.OnRoll -= LateDestroy;
+
+        Destroy(this.gameObject);
+
     }
 }

@@ -212,6 +212,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 6
   currentHealth: 0
+  isPlayer: 0
+  diceFaces: []
+  healthDice: []
+  damageText: {fileID: 7703617065054875037, guid: 188db4fdd9fa843448ded87d11e329f7, type: 3}
 --- !u!114 &7360386444627719560
 MonoBehaviour:
   m_ObjectHideFlags: 0
