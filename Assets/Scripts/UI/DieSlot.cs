@@ -67,7 +67,7 @@ public class DieSlot : ItemSlot
         }
     }
 
-    protected int GetValue()
+    public int GetValue()
     {
         if(isFull)
             return item.GetValue();

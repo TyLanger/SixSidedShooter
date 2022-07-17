@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageBuff : DieSlot
 {
 
-    string tooltip = "Boosts damage by die.";
+    //string tooltip = "Boosts damage by die.";
 
     protected override void Evaluate()
     {

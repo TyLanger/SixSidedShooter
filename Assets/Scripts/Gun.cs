@@ -14,6 +14,7 @@ public class Gun : MonoBehaviour
     public float reloadTime = 1;
     public int maxAmmo = 6;
     protected int currentShots = 0;
+    int boostAmmo = 0;
 
     protected float timeOfNextShot = 0;
 
@@ -30,7 +31,7 @@ public class Gun : MonoBehaviour
 
     void InstantReload()
     {
-        currentShots = maxAmmo;
+        currentShots = maxAmmo + boostAmmo;
     }
 
     protected bool CanFire()
@@ -59,5 +60,10 @@ public class Gun : MonoBehaviour
     public void BuffDamage(int boost)
     {
         damageBoost = boost;
+    }
+
+    public void ClipExtend(int boost)
+    {
+        boostAmmo = boost;
     }
 }

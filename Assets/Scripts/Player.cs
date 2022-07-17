@@ -73,6 +73,11 @@ public class Player : MonoBehaviour
         currentGun = allGuns[value - 1];
     }
 
+    public void ClipExtend(int value)
+    {
+        currentGun.ClipExtend(value);
+    }
+
     public void BuffDamage(int damageBoost)
     {
         currentGun.BuffDamage(damageBoost);

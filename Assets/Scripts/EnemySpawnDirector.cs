@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySpawnDirector : MonoBehaviour
 {
+    public event System.Action OnEnemyDeath;
+
     public Player player;
     public Enemy enemy;
     public Transform playerSatellite;
@@ -76,6 +78,8 @@ public class EnemySpawnDirector : MonoBehaviour
 
     void EnemyDied()
     {
+        OnEnemyDeath?.Invoke();
+
         enemiesAlive--;
         enemiesKilled++;
 

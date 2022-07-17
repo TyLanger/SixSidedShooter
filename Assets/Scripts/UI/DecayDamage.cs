@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealSlot : DieSlot
+public class DecayDamage : DieSlot
 {
-    //string tooltip = "Heal for die amount";
+    public DieSlot helper;
 
     protected override void Evaluate()
     {
         base.Evaluate();
+        int helperValue = helper.GetValue();
         if(isFull)
         {
-            diceMenu.playerStats.Heal(GetValue());
+            diceMenu.playerStats.BuffDamageDecay(GetValue(), helperValue);
         }
     }
 }
