@@ -11,9 +11,13 @@ public class DiceMenuController : MonoBehaviour
 
     public event Action OnRoll;
     public event Action OnDieEvaluation;
+    public event Action OnTempDieUsed;
 
     //public Player player;
     public PlayerStats playerStats;
+
+    public UIDie die;
+    public Transform dieHolder;
 
     // Start is called before the first frame update
     void Awake()
@@ -43,6 +47,7 @@ public class DiceMenuController : MonoBehaviour
             diceMenuHolder.gameObject.SetActive(isPaused);
             // tell the stats manager to update the player
             playerStats.PushChanges();
+            OnTempDieUsed?.Invoke();
         }
     }
 
@@ -54,5 +59,12 @@ public class DiceMenuController : MonoBehaviour
     void EvaluateDiceSelection()
     {
         OnDieEvaluation?.Invoke();
+    }
+
+    public void DicePickedUp()
+    {
+        //Debug.Log("Picked up");
+        var copy = Instantiate(die, dieHolder);
+        OnTempDieUsed += copy.DestroyTempDie;
     }
 }

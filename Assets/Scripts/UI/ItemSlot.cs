@@ -23,6 +23,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             if (!isFull)
             {
+                
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
                 isFull = true;
                 item = eventData.pointerDrag.GetComponent<UIDie>();

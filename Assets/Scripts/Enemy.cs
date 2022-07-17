@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     public Sprite[] faceSprites;
     public SpriteRenderer[] spriteRenderers;
 
+    public GameObject pickup;
+
     private void Awake()
     {
         health = GetComponent<Health>();
@@ -56,6 +58,13 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Death()
     {
+        if(Random.Range(1,7) == 1)
+        {
+            if (pickup != null)
+            {
+                Instantiate(pickup, transform.position, Quaternion.identity);
+            }
+        }
         OnDeath?.Invoke();
         Destroy(gameObject);
     }

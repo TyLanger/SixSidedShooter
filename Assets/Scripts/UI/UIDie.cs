@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIDie : DragDrop
 {
-
+    
 
     [SerializeField] int value = 1;
 
@@ -31,6 +31,12 @@ public class UIDie : DragDrop
         diceMenu.OnRoll += Roll;
     }
 
+    void UnHook()
+    {
+        diceMenu.OnRoll -= Roll;
+
+    }
+
     public void Roll()
     {
         ResetPos();
@@ -46,5 +52,12 @@ public class UIDie : DragDrop
     public int GetValue()
     {
         return value;
+    }
+
+    public void DestroyTempDie()
+    {
+        Debug.Log("Destroy temp die");
+        UnHook();
+        Destroy(gameObject);
     }
 }

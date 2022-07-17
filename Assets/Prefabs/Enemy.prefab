@@ -248,3 +248,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 821646a500cfe37479916e05594a9180, type: 3}
   spriteRenderers:
   - {fileID: 1641103681}
+  pickup: {fileID: 5675532990196920822, guid: 2b0d624617b6c2b4799512b49bda17dc, type: 3}
