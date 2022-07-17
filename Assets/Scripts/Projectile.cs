@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    protected void Death()
+    public void Death()
     {
         Destroy(gameObject);
     }

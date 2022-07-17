@@ -18,6 +18,7 @@ public class Motor : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + (moveDirection * moveSpeed * Time.fixedDeltaTime));
+        rb.velocity = Vector3.zero;
     }
 
     public void MoveTowards(Vector3 direction)

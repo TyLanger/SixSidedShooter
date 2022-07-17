@@ -18,6 +18,9 @@ public class PlayerStats : MonoBehaviour
     int damageBoostDecay = 0;
     int boostDecayIn = 1;
 
+    // grid
+    int areaBuff = 0;
+
     int killsSincePause = 0;
 
     private void Awake()
@@ -48,13 +51,20 @@ public class PlayerStats : MonoBehaviour
 
         player.ChangeGuns(currentGun);
         player.BuffDamage(damageBoost);
-        player.BuffDamage(damageBoostDecay);
-        player.BuffMoveSpeed(moveSpeedBoost);
+        player.BuffDamage(damageBoostDecay + areaBuff);
+        player.BuffMoveSpeed(moveSpeedBoost + areaBuff);
         player.GetComponent<Health>().Heal(healAmount);
         healAmount = 0;
-        player.ClipExtend(clipAmount);
+        player.ClipExtend(clipAmount + areaBuff);
         
 
+    }
+
+    public void AreaBuff(int amount)
+    {
+        // +2 to everything
+        areaBuff = amount;
+        PushChanges();
     }
 
     void Decay()
